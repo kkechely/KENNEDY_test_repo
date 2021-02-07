@@ -103,7 +103,18 @@ garden_harvest %>%
   4. Subset the data to tomatoes. Reorder the tomato varieties from smallest to largest first harvest date. Create a barplot of total harvest in pounds for each variety, in the new order.
 
 ```{r}
-
+garden_harvest %>% 
+  filter(vegetable == "tomatoes") %>% 
+  mutate(variety2 = fct_reorder(variety, date, min, .desc =FALSE)) %>% 
+  group_by(variety2) %>% 
+  summarise(variety_weight_lbs = sum(weight) * 0.00220462,
+            mindate=min(date)) %>%  #I have this here just to make sure my reorder fn is working properly
+  ggplot() +
+  geom_col(aes(y = variety_weight_lbs, x = variety2)) +
+  labs(title = "Weight (lbs) of Tomato Harvests Ordered by Earliest to Latest Harvest Date",
+       x = "",
+       y= "") +
+  theme(axis.text.x = element_text(angle = 30))
 ```
 
   5. In the `garden_harvest` data, create two new variables: one that makes the varieties lowercase and another that finds the length of the variety name. Arrange the data by vegetable and length of variety name (smallest to largest), with one row for each vegetable variety. HINT: use `str_to_lower()`, `str_length()`, and `distinct()`.
