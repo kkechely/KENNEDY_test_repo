@@ -1,0 +1,17 @@
+---
+title: "TestGit"
+author: "Kennedy Kechely"
+date: "2/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is a test file. 
+
+```{r}
+3+4
+```
+
